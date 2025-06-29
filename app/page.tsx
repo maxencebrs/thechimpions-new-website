@@ -1,103 +1,134 @@
-import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
-export default function Home() {
+async function getKPIs() {
+  try {
+    const { data, error } = await supabase.from('kpis').select('*');
+    if (error) {
+      console.error('Supabase error:', error);
+      throw error;
+    }
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching KPIs:', error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const kpis = await getKPIs();
+
+  // Map KPI names to required display order
+  const kpiOrder = [
+    'Validator TVL',
+    'Monthly revenue',
+    'Total DAO treasury',
+    'Total AUM',
+    'Collection floor price',
+  ];
+  const orderedKpis = kpiOrder.map((name) => kpis.find((k) => k.name === name));
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="relative min-h-screen flex flex-col">
+      {/* Hero Section */}
+      <div className="relative flex flex-col items-center justify-center text-center py-20 px-4 mb-12">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/hero-bg.png"
+            alt="Brand Visual"
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-black opacity-60" />
+        </div>
+        <div className="relative z-10">
+          <h1 className="text-5xl font-bold mb-4 text-white drop-shadow-lg">Welcome to The Chimpions</h1>
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-2">
+            a community-powered force of art, capital, and culture on Solana.<br />
+            We're not just NFTs — we're a movement.
+          </p>
+        </div>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+      {/* Live Stats (KPIs) */}
+      <div className="container mx-auto px-4 mb-16">
+        <h2 className="text-2xl font-bold mb-6 text-center">Live Stats</h2>
+        <div className="flex flex-col items-center">
+          <div className="flex flex-col md:flex-row gap-6 w-full justify-center">
+            {orderedKpis.map((kpi, idx) => (
+              <div
+                key={kpi?.id || idx}
+                className="flex-1 bg-gray-800 rounded-lg p-6 border border-gray-700 min-w-[180px] text-center"
+              >
+                <h3 className="text-lg font-semibold text-gray-300 mb-2">{kpi?.name || '-'}</h3>
+                <p className="text-3xl font-bold text-white mb-2">{kpi?.value ?? '-'}</p>
+                {kpi?.description && (
+                  <p className="text-sm text-gray-400">{kpi.description}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* What is The Chimpions */}
+      <div className="container mx-auto px-4 mb-16">
+        <h2 className="text-2xl font-bold mb-4">What is The Chimpions</h2>
+        <p className="text-gray-200 max-w-2xl mb-4">
+          The Chimpions is a curated community of 222 holders using art and capital to build the future of on-chain culture.
+        </p>
+        <p className="text-gray-200 max-w-2xl mb-4">
+          Every Chimpion is a 1/1 hand-animated NFT — your identity, your voice, your ticket to the Treehouse.
+        </p>
+        <p className="text-gray-200 max-w-2xl">
+          As a holder, you help govern a living treasury, back emerging creators, and shape projects with real-world impact.
+        </p>
+      </div>
+
+      {/* DAO Revenue Streams */}
+      <div className="container mx-auto px-4 mb-16">
+        <h2 className="text-2xl font-bold mb-4">DAO Revenue Streams</h2>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-1">Validator Rewards</h3>
+            <p className="text-gray-300">Revenue earned from staking SOL through The Chimpions validator. Pure revenue from delegations.</p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-1">NFT Royalties</h3>
+            <p className="text-gray-300">Set at 7% on secondary sales. These fund DAO initiatives and reward aligned creators.</p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-1">Merch</h3>
+            <p className="text-gray-300">Branded merch and 1/1 digital products made by and for the community.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="container mx-auto px-4 mb-20 text-center">
+        <h2 className="text-2xl font-bold mb-4">Collect your Chimpion:</h2>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://magiceden.io/marketplace/the_chimpions"
             target="_blank"
             rel="noopener noreferrer"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Magic Eden
           </a>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://www.tensor.trade/trade/the_chimpions"
             target="_blank"
             rel="noopener noreferrer"
+            className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
           >
-            Read our docs
+            Tensor
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Legal note for footer */}
+      <div className="text-center text-xs text-gray-500 pb-4">
+        The Chimpions is registered as a Foundation. Ownership and direction belong to the holders.
+      </div>
     </div>
   );
 }
