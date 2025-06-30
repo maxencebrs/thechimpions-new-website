@@ -22,42 +22,35 @@ const holders = [
   // Add more mock holders as needed
 ];
 
-export default function HoldersPage() {
+export default function Holders() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Our Holders</h1>
-        <p className="text-lg text-gray-200 max-w-2xl mx-auto">
-          Behind every great Chimpion is a great holder. Here's the community shaping the future of on-chain culture.
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-white mb-8">Our Holders</h1>
+      
+      <div className="bg-white bg-opacity-5 rounded-lg p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">Behind every great Chimpion is a great holder.</h2>
+        <p className="text-gray-300 mb-6">
+          Here's the community shaping the future of on-chain culture.
         </p>
       </div>
-
-      {/* Holder Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {holders.map((holder) => (
-          <div key={holder.id} className="bg-gray-900 rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6">
-            <img
-              src={holder.pfp}
-              alt={holder.twitter}
-              className="w-20 h-20 rounded-full mb-4 border-2 border-gray-700 object-cover"
-              style={{ imageRendering: "pixelated" }}
-            />
-            <div className="mb-2 text-gray-100 font-semibold">{holder.discord}</div>
-            <a
-              href={holder.twitter_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline mb-2"
-            >
-              {holder.twitter}
-            </a>
-            <div className="text-gray-300 text-sm">Chimpions owned: <span className="font-bold">{holder.count}</span></div>
-          </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {holders.map(holder => (
+            <div key={holder.id} className="card-interactive p-4">
+                <div className="flex items-center space-x-4">
+                    <img src={holder.pfp} alt={holder.discord} className="w-16 h-16 rounded-full bg-gray-700"/>
+                    <div>
+                        <a href={holder.twitter_url} target="_blank" rel="noopener noreferrer" className="font-bold text-lg hover:underline">{holder.twitter}</a>
+                        <p className="text-sm text-gray-400">{holder.discord}</p>
+                    </div>
+                </div>
+                <div className="mt-4 text-right">
+                    <span className="text-sm bg-purple-600/20 text-purple-300 px-2 py-1 rounded-full">
+                        Owns {holder.count}
+                    </span>
+                </div>
+            </div>
         ))}
-        {holders.length === 0 && (
-          <div className="col-span-full text-center text-gray-400">No holders found.</div>
-        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 const faqs = [
   {
@@ -13,20 +13,14 @@ const faqs = [
     question: "Where can I buy one?",
     answer: (
       <span>
-        👉 <a href="https://www.tensor.trade/trade/the_chimpions" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Tensor</a><br />
-        👉 <a href="https://magiceden.io/marketplace/the_chimpions" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Magic Eden</a>
+        👉 <a href="https://www.tensor.trade/trade/the_chimpions" className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Tensor</a><br />
+        👉 <a href="https://magiceden.io/marketplace/the_chimpions" className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Magic Eden</a>
       </span>
     ),
   },
   {
     question: "Who leads this?",
-    answer: (
-      <span>
-        Every 6 months, the Chimpions elect the council. Any member of the CHIAO can run.<br />
-        In April 2025, 8 members were elected to lead the Chimpions. In addition, an executive team of 3 members was appointed.<br />
-        More here: <a href="https://chimpions.co/the-chiao" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">https://chimpions.co/the-chiao</a>
-      </span>
-    ),
+    answer: "Every 6 months, the Chimpions elect the council. Any member of the CHIAO can run. In April 2025, 8 members were elected to lead the Chimpions. In addition, an executive team of 3 members was appointed.",
   },
   {
     question: "Do Chimpions have rarity rankings?",
@@ -34,12 +28,7 @@ const faqs = [
   },
   {
     question: "Who is the Chimpions artist?",
-    answer: (
-      <span>
-        All Chimpions have been hand-drawn by Zen0, Zulp, Brink and Rabbels.<br />
-        All animations were created by @Katsu, with 10 collabs by @zeroX and @Duckyzz.
-      </span>
-    ),
+    answer: "All Chimpions have been hand-drawn by Zen0, Zulp, Brink and Rabbels. All animations were created by @Katsu, with 10 collabs by @zeroX and @Duckyzz.",
   },
   {
     question: "What is the Treehouse?",
@@ -48,59 +37,45 @@ const faqs = [
   {
     question: "How do I get in the Treehouse?",
     answer: (
-      <span>
-        <ul className="list-disc list-inside">
-          <li>Hold a Chimpion NFT</li>
-          <li>Hold a TWS edition → <a href="https://magiceden.io/creators/the_chimpions" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Magic Eden</a></li>
-          <li>Or stake via The Chimpions validator → (insert twitter link)</li>
-        </ul>
-      </span>
+        <span>
+            - Hold a Chimpion NFT<br />
+            - Hold a TWS edition → <a href="https://magiceden.io/creators/the_chimpions" className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Magic Eden</a><br />
+            - Or stake via The Chimpions validator → (insert twitter link)
+        </span>
     ),
-  },
-  {
-    question: "What is a Solana validator?",
-    answer: "TBD",
-  },
-  {
-    question: "Why do we run a validator?",
-    answer: "TBD",
   },
   {
     question: "Where are the The Chimpions holders located?",
     answer: (
       <span>
-        All over the world — see <a href="https://konn3ct.xyz" className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">Konn3ct</a>
+        All over the world — see <a href="https://konn3ct.xyz" className="text-blue-400 hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Konn3ct</a>
       </span>
     ),
   },
   {
     question: "What else should I know?",
-    answer: (
-      <span>
-        The Chimpions are a tight-knit community.<br />
-        Ask questions. Reach out to a Council Member. We're here to help.
-      </span>
-    ),
+    answer: "The Chimpions are a tight-knit community. Ask questions. Reach out to a Council Member. We're here to help.",
   },
 ];
 
-export default function FAQPage() {
+export default function FAQ() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Frequently Asked Questions</h1>
-      <div className="max-w-2xl mx-auto">
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => (
-            <details key={idx} className="bg-gray-800 rounded-lg p-4 border border-gray-700 group">
-              <summary className="cursor-pointer text-lg font-semibold text-white group-open:text-blue-400 transition-colors">
-                {faq.question}
-              </summary>
-              <div className="mt-2 text-gray-300">
-                {faq.answer}
-              </div>
-            </details>
-          ))}
-        </div>
+      <h1 className="text-4xl font-bold text-white mb-2">Frequently Asked Questions</h1>
+      <p className="text-gray-300 mb-8 max-w-2xl">
+        Answers to the most common questions about The Chimpions, our DAO, NFTs, validator, and more.
+        If you're still unsure — hop in Discord, we'll help.
+      </p>
+      
+      <div className="space-y-6">
+        {faqs.map((faq, idx) => (
+          <div key={idx} className="bg-white bg-opacity-5 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-white mb-2">{faq.question}</h3>
+            <div className="text-gray-300">
+              {faq.answer}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,76 +1,107 @@
-export default function ValidatorPage() {
-  // Placeholder values for dynamic stats
-  const stats = [
-    { label: 'APY', value: '6.2%' }, // Example value
-    { label: 'Commission', value: '5%' },
-    { label: 'Uptime', value: '99.9%' }, // Example value
-    { label: 'Delegated SOL', value: '12,345' }, // Example value
-    { label: 'Total Stakers', value: '222' }, // Example value
-  ];
-
+export default function Validator() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">The Chimpions Validator</h1>
-        <p className="text-xl text-gray-200">Stake with purpose. Secure the network. Grow the DAO.</p>
-      </div>
-
-      {/* Live Stats */}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-center">Live Stats</h2>
-        <div className="flex flex-col md:flex-row gap-6 justify-center">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex-1 min-w-[160px] bg-gray-800 rounded-lg p-6 border border-gray-700 text-center">
-              <h3 className="text-lg font-semibold text-gray-300 mb-2">{stat.label}</h3>
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* How It Works */}
-      <div className="mb-10 max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-2">How It Works</h2>
-        <p className="text-gray-200 mb-2">
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-white mb-8">The Chimpions Validator</h1>
+      
+      <div className="bg-white bg-opacity-5 rounded-lg p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">Stake with purpose. Secure the network. Grow the DAO.</h2>
+        <p className="text-gray-300 mb-6">
           When you delegate your SOL to The Chimpions validator, you're directly helping secure the network while supporting a values-driven DAO.
         </p>
-        <ul className="list-disc list-inside text-gray-300 mb-2">
-          <li>Stake directly to our validator via wallet</li>
-          <li>Or swap to the LST token <b>ChimpSol</b></li>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
+          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">APY</h3>
+            <p className="text-3xl font-bold text-green-400">~7.5%</p>
+          </div>
+          
+          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Commission</h3>
+            <p className="text-3xl font-bold text-blue-400">5%</p>
+          </div>
+          
+          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Uptime</h3>
+            <p className="text-3xl font-bold text-purple-400">99.9%</p>
+          </div>
+          
+          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Delegated SOL</h3>
+            <p className="text-3xl font-bold text-yellow-400">12,345</p>
+          </div>
+          
+          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Total Stakers</h3>
+            <p className="text-3xl font-bold text-pink-400">222</p>
+          </div>
+        </div>
+        
+        <div className="mt-6">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+            Stake Now
+          </button>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="bg-white bg-opacity-5 rounded-lg p-6">
+          <h3 className="text-xl font-semibold text-white mb-4">How It Works</h3>
+          <p className="text-gray-300 mb-4">
+            You can either:
+          </p>
+          <ul className="space-y-2 text-gray-300">
+            <li>• Stake directly to our validator via wallet</li>
+            <li>• Or swap to the LST token <strong>ChimpSol</strong></li>
+          </ul>
+        </div>
+        
+        <div className="bg-white bg-opacity-5 rounded-lg p-6">
+          <h3 className="text-xl font-semibold text-white mb-4">Why Stake with Chimpions?</h3>
+          <ul className="space-y-2 text-gray-300">
+            <li>• Among the best APYs on Solana</li>
+            <li>• Access to the Treehouse sub-community</li>
+            <li>• Eligible for exclusive airdrops & editions</li>
+            <li>• Revenue helps fund DAO initiatives</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div className="bg-white bg-opacity-5 rounded-lg p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">Solana DeFi Integration</h2>
+        <p className="text-gray-300 mb-4">
+          ChimpSol is being integrated into the broader Solana DeFi ecosystem:
+        </p>
+        <ul className="space-y-2 text-gray-300">
+          <li>• <strong>Loopscale integration is live</strong> with a 4x multiplier</li>
+          <li>• More integrations to come</li>
         </ul>
       </div>
-
-      {/* Why Stake with Chimpions */}
-      <div className="mb-10 max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-2">Why Stake with Chimpions?</h2>
-        <ul className="list-disc list-inside text-gray-300">
-          <li>Among the best APYs on Solana</li>
-          <li>Access to the Treehouse sub-community</li>
-          <li>Eligible for exclusive airdrops & editions</li>
-          <li>Revenue helps fund DAO initiatives</li>
-        </ul>
+      
+      <div className="bg-white bg-opacity-5 rounded-lg p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">How to Delegate</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 className="text-lg font-bold mb-2">Option 1: Stake directly in your wallet</h3>
+                <p className="text-gray-400">Open Phantom, Backpack, Solflare, etc.</p>
+                <p className="text-gray-400">Go to: Stake → Validators</p>
+                <p className="text-gray-400">Search: Chimpions or paste validator address</p>
+                <p className="text-gray-400">Choose amount and confirm</p>
+            </div>
+            <div>
+                <h3 className="text-lg font-bold mb-2">Option 2: Mint ChimpSol (Liquid Staking)</h3>
+                <p className="text-gray-400 mb-4">Use our built-in Jupiter Terminal widget to swap SOL → ChimpSol. ChimpSol is composable and grows your yield over time.</p>
+                <div className="bg-black/20 rounded-lg p-8 text-center">
+                    <p className="text-white">Jupiter Terminal Widget Placeholder</p>
+                </div>
+            </div>
+        </div>
       </div>
-
-      {/* Solana DeFi Integration */}
-      <div className="mb-10 max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-2">Solana DeFi Integration</h2>
-        <ul className="list-disc list-inside text-gray-300">
-          <li><b>Loopscale integration is live</b> with a 4x multiplier</li>
-          <li>More integrations to come</li>
-        </ul>
-      </div>
-
-      {/* How to Delegate */}
-      <div className="mb-10 max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-2">How to Delegate</h2>
-        <p className="text-gray-200 mb-2">Simple in-wallet delegation supported.<br />Or use the Jupiter Terminal to swap SOL → ChimpSol directly here.</p>
-      </div>
-
-      {/* For Builders & Protocols */}
-      <div className="mb-10 max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-2">For Builders & Protocols</h2>
-        <p className="text-gray-200">Want to integrate ChimpSol? Reach out to discuss incentives and support.</p>
+      
+      <div className="bg-white bg-opacity-5 rounded-lg p-8">
+        <h2 className="text-2xl font-semibold text-white mb-4">For Builders & Protocols</h2>
+        <p className="text-gray-300">
+          Want to integrate ChimpSol? Reach out to discuss incentives and support.
+        </p>
       </div>
     </div>
   );
